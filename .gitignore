@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Build, Output, and Release Artifacts
+build/
+dist/
+dist-electron/
+release/win-unpacked/
+release/linux-unpacked/
+release/*.exe
+release/*.7z
+release/*.AppImage
+release/builder-debug.yml
+/squashfs-root/
+
+# Tests and Logs
+coverage/
+*.log
+
+# System Files
+.DS_Store
+
+# Environment and Secrets
+.env*
+!.env.example
+*.enc
+
+# Internal Stage A/B/C reports and audits
+/STAGE_*.md
+/docs/*STAGE_*.md

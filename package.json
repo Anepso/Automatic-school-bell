@@ -1,0 +1,104 @@
+{
+  "name": "react-example",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "tsx server.ts",
+    "dev:desktop": "npm run build:backend && electron .",
+    "desktop:production": "npm run build && electron . --production",
+    "build": "npm run build:renderer && npm run build:backend",
+    "build:renderer": "vite build",
+    "build:backend": "esbuild server.ts --bundle --platform=node --target=node22 --format=cjs --outfile=dist-electron/backend.cjs --external:@google/genai --external:express --external:dotenv --external:vite",
+    "start": "tsx server.ts",
+    "preview": "vite preview",
+    "clean": "rm -rf dist dist-electron server.js",
+    "lint": "tsc --noEmit",
+    "test:f04": "node --test \"electron/__tests__/f04-*.test.cjs\"",
+    "test:f03": "node --test \"electron/__tests__/autostart-*.test.cjs\"",
+    "build:linux": "electron-builder --linux AppImage --x64"
+  },
+  "dependencies": {
+    "@google/genai": "^2.4.0",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "lucide-react": "^0.546.0",
+    "motion": "^12.23.24",
+    "react": "^19.0.1",
+    "react-dom": "^19.0.1",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "autoprefixer": "^10.4.21",
+    "electron": "^44.4.5",
+    "esbuild": "^0.25.0",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.21.0",
+    "typescript": "^7.0.2",
+    "@types/express": "^4.17.21",
+    "vite": "^8.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "electron-builder": "26.15.3"
+  },
+  "productName": "School Bell",
+  "description": "Aplikasi School Bell Otomatis",
+  "author": "Anep'so",
+  "license": "Proprietary",
+  "build": {
+    "appId": "com.anepso.schoolbell",
+    "productName": "School Bell",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "package.json",
+      "dist/**",
+      "dist-electron/**",
+      "electron/*.cjs",
+      "electron/assets/**"
+    ],
+    "asar": true,
+    "asarUnpack": [
+      "dist-electron/backend.cjs",
+      "node_modules/**"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "perMachine": false,
+      "allowElevation": false,
+      "oneClick": true,
+      "allowToChangeInstallationDirectory": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": false
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "electron/assets/logo-schoolbell.png",
+      "category": "Utility",
+      "executableName": "school-bell"
+    }
+  }
+}

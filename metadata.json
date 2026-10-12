@@ -1,0 +1,6 @@
+{
+  "name": "School Bell",
+  "description": "Aplikasi Windows Bel Sekolah Otomatis Cerdas dengan AI Assistant, Penjadwalan Dinamis, dan System Tray.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
